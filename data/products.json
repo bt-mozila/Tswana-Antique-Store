@@ -64,5 +64,72 @@
     "category": "Kitchen",
     "condition": "New",
     "stock": 12
+  },
+  {
+    "id": "p7",
+    "title": "Xambura Xa Woven Basket",
+    "price": 255.00,
+    "currency": "P",
+    "description": "Handwoven Tswana basket made from natural fibers.",
+    "image": "assets/img/bascket1.jpg",
+    "category": "Baskets",
+    "condition": "Good",
+    "stock": 5
+  },
+  {
+    "id": "p8",
+    "title": "Handcrafted Trinket Bowl",
+    "price": 225.00,
+    "currency": "P",
+    "description": "Small decorative bowl for jewelry or trinkets.",
+    "image": "assets/img/bascket2.jpg",
+    "category": "Decor",
+    "condition": "Very Good",
+    "stock": 8
+  },
+  {
+    "id": "p9",
+    "title": "Strip Light Craft",
+    "price": 230.00,
+    "currency": "P",
+    "description": "Decorative strip light accessory inspired by local designs.",
+    "image": "assets/img/bascket3.jpg",
+    "category": "Lighting",
+    "condition": "Good",
+    "stock": 4
+  },
+  {
+    "id": "p10",
+    "title": "Home Refresh Idea Set",
+    "price": 275.00,
+    "currency": "P",
+    "description": "A curated set of small home accents.",
+    "image": "assets/img/bascket4.jpg",
+    "category": "Home",
+    "condition": "Good",
+    "stock": 6
+  },
+{
+    "id": "p11",
+    "title": "Vintage Print",
+    "price": 320.00,
+    "currency": "P",
+    "description": "Limited-edition print by local artist.",
+    "image": "assets/img/Photo8.jpg",
+    "category": "Art",
+    "condition": "Like New",
+    "stock": 2
+  },
+  {
+    "id": "p12",
+    "title": "Tswana Logo Mug",
+    "price": 95.00,
+    "currency": "P",
+    "description": "Ceramic mug with Tswana designs.",
+    "image": "assets/img/Photo8.png",
+    "category": "Kitchen",
+    "condition": "New",
+    "stock": 12
   }
+
 ]
