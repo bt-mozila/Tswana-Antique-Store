@@ -3,112 +3,846 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tswana Antique Store </title>
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <title>Tswana-Antique</title>
+  <style>
+    /* --- CSS VARIABLES & RESET --- */
+    :root {
+      --bg-dark: #0f1412;
+      --bg-card: #19221e;
+      --accent-gold: #d4af37;
+      --accent-gold-hover: #b89628;
+      --accent-copper: #b87333;
+      --text-main: #f4f4f0;
+      --text-muted: #a3b1a8;
+      --border-color: #2a3831;
+      --radius-md: 8px;
+      --radius-lg: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Georgia, serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* --- LAYOUT & UTILITIES --- */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* --- NAVIGATION --- */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: sticky;
+      top: 0;
+      background-color: rgba(15, 20, 18, 0.85);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--accent-gold);
+    }
+
+    .brand img {
+      max-height: 40px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .cart-icon-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.6rem 1.2rem;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      transition: border-color 0.2s;
+    }
+
+    .cart-icon-btn:hover {
+      border-color: var(--accent-gold);
+    }
+
+    .cart-badge {
+      background: var(--accent-copper);
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      padding: 4rem 0;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      background: radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+    }
+
+    /* --- FILTER BAR --- */
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+      background: rgba(212, 175, 55, 0.1);
+    }
+
+    /* --- PRODUCT GRID --- */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-copper);
+    }
+
+    .product-image {
+      height: 220px;
+      background: #111815;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid var(--border-color);
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+    }
+
+    .product-info {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .product-title {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .product-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .product-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+
+    .price {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent-copper);
+    }
+
+    .btn-add {
+      background: var(--accent-gold);
+      color: #000;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-add:hover {
+      background: var(--accent-gold-hover);
+    }
+
+    /* --- PRODUCT DETAIL MODAL (ALIEXPRESS STYLE) --- */
+    .product-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 300;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .product-modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .product-detail-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      width: 90%;
+      max-width: 950px;
+      max-height: 90vh;
+      border-radius: var(--radius-lg);
+      overflow-y: auto;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      padding: 2.5rem;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    }
+
+    @media (max-width: 768px) {
+      .product-detail-card {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+      }
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .close-modal:hover {
+      color: #fff;
+    }
+
+    /* Detail View Gallery */
+    .gallery-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .main-image-view {
+      width: 100%;
+      height: 350px;
+      background: #111815;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .main-image-view img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .thumbnail-list {
+      display: flex;
+      gap: 0.75rem;
+      overflow-x: auto;
+    }
+
+    .thumbnail {
+      width: 70px;
+      height: 70px;
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      object-fit: cover;
+      opacity: 0.6;
+      transition: all 0.2s;
+    }
+
+    .thumbnail.active, .thumbnail:hover {
+      opacity: 1;
+      border-color: var(--accent-gold);
+    }
+
+    /* Detail View Info */
+    .detail-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .detail-title {
+      font-size: 1.8rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .detail-badge {
+      display: inline-block;
+      background: rgba(212, 175, 55, 0.15);
+      color: var(--accent-gold);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      width: fit-content;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .detail-price-box {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .detail-price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-copper);
+    }
+
+    .detail-specs {
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .detail-specs p {
+      margin-bottom: 0.4rem;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .qty-btn {
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    .qty-input {
+      width: 50px;
+      height: 32px;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: auto;
+    }
+
+    .btn-buy-now {
+      flex: 1;
+      background: var(--accent-copper);
+      color: #fff;
+      border: none;
+      padding: 0.8rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn-buy-now:hover {
+      opacity: 0.9;
+    }
+
+    /* --- CART DRAWER --- */
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 380px;
+      height: 100%;
+      background: var(--bg-card);
+      border-left: 1px solid var(--border-color);
+      box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+      transition: right 0.3s ease;
+      z-index: 400;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+    }
+
+    .cart-drawer.open {
+      right: 0;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .close-cart {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .cart-items {
+      flex-grow: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.75rem;
+    }
+
+    .cart-footer {
+      border-top: 1px solid var(--border-color);
+      padding-top: 1rem;
+      margin-top: 1rem;
+    }
+
+    .total-price {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .btn-checkout {
+      width: 100%;
+      background: var(--accent-copper);
+      color: #fff;
+      border: none;
+      padding: 0.8rem;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
-    <!-- <header>
-      <nav class="navbar" role="navigation" aria-label="Main navigation">
-        <div class="nav-logo">
-          <a href="#"><img src="assets/img/logo.png" alt="Tswana Antique Store logo"></a>
-        </div>
 
-        <div class="nav-links">
-          <a href="#orders" class="link-button">Orders</a>
-          <a href="#inspirations" class="link-button">Inspirations</a>
-          <a href="#about" class="link-button">About</a>
-        </div>
+<div class="container">
+  <nav>
+    <div class="brand">
+      <img src="logo.png" alt="Tswana Antique Store logo" onerror="this.style.display='none'">
+    </div>
 
-        <div class="nav-contact">
-          <p>Contact: <a href="tel:+26777075418">77 075 418</a></p>
-        </div>
+    <button class="cart-icon-btn" onclick="toggleCart()">
+      🛒 Cart <span class="cart-badge" id="cart-count">0</span>
+    </button>
+  </nav>
 
-        <div class="cart">
-          <a href="#" class="link-button cart-link" aria-label="View cart">Cart (<span id="cart-count">0</span>)</a>
-        </div>
-      </nav>
-    </header> -->
+  <header class="hero">
+    <h1>Authentic Antique Collection</h1>
+    <p>Handcrafted copper bangles, heritage bracelets, and traditional hand-woven hats crafted with legacy and tradition.</p>
+  </header>
 
-    <header class="header">
-  <div class="header-announcement">
-    Preserving Botswana's Heritage. Free shipping on all artifacts.
+  <div class="controls">
+    <button class="filter-btn active" onclick="filterCategory('all')">All Items</button>
+    <button class="filter-btn" onclick="filterCategory('bangles')">Copper Bangles</button>
+    <button class="filter-btn" onclick="filterCategory('bracelets')">Bracelets</button>
+    <button class="filter-btn" onclick="filterCategory('hats')">Traditional Hats</button>
   </div>
 
-  <nav class="navbar" role="navigation" aria-label="Main navigation">
-    <div class="nav-left">
-      <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="Tswana Antique Store logo"></a>
-        <a href="#inspirations">Inspirations</a>
-        <a href="#orders">Orders</a>
-        <a href="#about">About</a>
+  <div class="product-grid" id="product-container"></div>
+
+  <!-- PRODUCT DETAIL MODAL (E-Commerce Style) -->
+  <div class="product-modal-overlay" id="product-modal">
+    <div class="product-detail-card">
+      <button class="close-modal" onclick="closeProductModal()">&times;</button>
+
+      <div class="gallery-container">
+        <div class="main-image-view">
+          <img id="detail-main-img" src="" alt="Product Detail View">
+        </div>
+        <div class="thumbnail-list" id="detail-thumbnails">
+          <!-- Thumbnails dynamically rendered -->
+        </div>
+      </div>
+
+      <div class="detail-info">
+        <span class="detail-badge" id="detail-badge">Handcrafted Heritage</span>
+        <h2 class="detail-title" id="detail-title">Product Title</h2>
+
+        <div class="detail-price-box">
+          <div class="detail-price" id="detail-price">P0.00</div>
+          <small style="color: var(--text-muted);">Tax included. Free shipping on select orders.</small>
+        </div>
+
+        <div class="detail-specs">
+          <p><strong>Description:</strong> <span id="detail-desc">---</span></p>
+          <p><strong>Material:</strong> Authentic Copper & Local Natural Fibers</p>
+          <p><strong>Origin:</strong> Botswana</p>
+          <p><strong>Availability:</strong> <span style="color: #4ade80;">In Stock</span></p>
+        </div>
+
+        <div class="quantity-control">
+          <label style="color: var(--text-muted);">Quantity:</label>
+          <button class="qty-btn" onclick="changeQty(-1)">-</button>
+          <input type="number" id="detail-qty" class="qty-input" value="1" min="1" readonly>
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn-add" style="flex: 1; padding: 0.8rem;" id="modal-add-btn">Add to Cart</button>
+          <button class="btn-buy-now" onclick="buyNow()">Buy Now</button>
+        </div>
       </div>
     </div>
+  </div>
 
-    <div class="nav-right">
-      <div class="header-search">
-        <input type="text" placeholder="Search archive..." aria-label="Search">
-      </div>
-      
-      <div class="nav-utilities">
-        <a href="tel:+26777075418" class="nav-icon-link" title="Contact Support">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </a>
-        <a href="#" class="cart-pill" aria-label="View cart">
-          Cart <span id="cart-count">0</span>
-        </a>
-      </div>
+  <!-- CART DRAWER -->
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h3>Your Selection</h3>
+      <button class="close-cart" onclick="toggleCart()">&times;</button>
     </div>
-  </nav>
-</header>
-
-<!-- Hero Section Start -->
-    <section class="hero-section" aria-label="Promotional hero"></section>
-
-    <section class="shop-section">
-      <div id="product-grid" class="shop-images">
-        <!-- Products will be injected here by JavaScript -->
+    <div class="cart-items" id="cart-items">
+      <p style="color: var(--text-muted);">Your cart is empty.</p>
+    </div>
+    <div class="cart-footer">
+      <div class="total-price">
+        <span>Total:</span>
+        <span id="cart-total">P0.00</span>
       </div>
-    </section>
-<!-- Hero Section End -->
+      <button class="btn-checkout" onclick="checkout()">Proceed to Checkout</button>
+    </div>
+  </div>
 
+  <footer>
+    <p>&copy; 2026 Tswana-Antique Store. Designed by <a href="https://202studios.co.bw" target="_blank" style="color: var(--accent-gold); text-decoration: none;">202Studios</a></p>
+  </footer>
+</div>
 
-<footer>
-      <a href="#" class="footer-title">
-        Back to top
-      </a>
-      <div class="footer-items">
-        <ul>
-          <h3>Get to Know Us</h3>
-          <li><a href="#">About us</a></li>
-          <li><a href="#">Careers</a></li>
-          <li><a href="#">Press Release</a></li>
-        </ul>
-        <ul>
-          <h3>Connect with Us</h3>
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Instagram</a></li>
-        </ul>
-        <ul>
-          <h3>Make Money with Us</h3>
-          <li><a href="#">Sell on Tswana Crafts</a></li>
-          <li><a href="#">Sell under Tswana Crafts Accelerator</a></li>
-          <li><a href="#">Protect and Build Your Brand</a></li>
-          <li><a href="#">Tswana Crafts Global Selling</a></li>
-          <li><a href="#">Become an Affiliate</a></li>
-          <li><a href="#">Fulfillment by Tswana Crafts</a></li>
-          <li><a href="#">Advertise Your Products</a></li>
-          <li><a href="#">Tswana Crafts Pay on Merchants</a></li>
-        </ul>
-        <ul>
-          <h3>Let Us Help You</h3>
-          <li><a href="#">Return Centre</a></li>
-          <li><a href="#">100% Purchase Protection</a></li>
-          <li><a href="#">Tswana Crafts App Download</a></li>
-          <li><a href="#">Help</a></li>
-        </ul>
-      </div>
-    </footer>
+<script>
+  // Extended product data including gallery sample pictures
+  const products = [
+    {
+      id: 1,
+      name: "Hand-Hammered Copper Bangle",
+      category: "bangles",
+      price: 45.00,
+      image: "antique2.png",
+      gallery: ["antique2.png", "antique1.png", "antique2.png"],
+      desc: "Pure copper metalwork with traditional engraved motifs."
+    },
+    {
+      id: 2,
+      name: "Twisted Copper Wristband",
+      category: "bangles",
+      price: 55.00,
+      image: "antique2.png",
+      gallery: ["antique2.png", "antique1.png"],
+      desc: "Classic twisted dual-strand copper wire design."
+    },
+    {
+      id: 3,
+      name: "Beaded Heritage Bracelet",
+      category: "bracelets",
+      price: 35.00,
+      image: "antique2.png",
+      gallery: ["antique2.png", "antique1.png"],
+      desc: "Hand-strung antique brass and glass beads."
+    },
+    {
+      id: 4,
+      name: "Woven Palm-Leaf Sun Hat",
+      category: "hats",
+      price: 60.00,
+      image: "antique2.png",
+      gallery: ["antique2.png", "antique1.png"],
+      desc: "Handcrafted natural fiber weave with sturdy sun protection."
+    },
+    {
+      id: 5,
+      name: "Raw Copper Cuff",
+      category: "bangles",
+      price: 50.00,
+      image: "antique1.png",
+      gallery: ["antique1.png", "antique2.png"],
+      desc: "Minimalist open-cuff design built to age with patina."
+    },
+    {
+      id: 6,
+      name: "Ceremonial Straw Hat",
+      category: "hats",
+      price: 75.00,
+      image: "antique2.png",
+      gallery: ["antique2.png", "antique1.png"],
+      desc: "Intricately detailed traditional ceremonial headwear."
+    },
+    {
+      id: 7,
+      name: "Ceremonial Straw Hat",
+      category: "hats",
+      price: 75.00,
+      image: "antique2.png",
+      gallery: ["antique2.png", "antique1.png"],
+      desc: "Intricately detailed traditional ceremonial headwear."
+    },
+    {
+      id: 8,
+      name: "Ceremonial Straw Hat",
+      category: "hats",
+      price: 75.00,
+      image: "antique2.png",
+      gallery: ["antique2.png", "antique1.png"],
+      desc: "Intricately detailed traditional ceremonial headwear."
+    }
 
-  <script src="assets/js/main.js"></script>
+  ];
+
+  let cart = [];
+  let currentProduct = null;
+
+  // Render Product Grid
+  function renderProducts(items) {
+    const container = document.getElementById('product-container');
+    container.innerHTML = items.map(product => `
+        <div class="product-card" onclick="openProductModal(${product.id})">
+            <div class="product-image">
+                <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/250?text=Antique+Item'">
+            </div>
+            <div class="product-info">
+                <div class="product-title">${product.name}</div>
+                <div class="product-desc">${product.desc}</div>
+                <div class="product-bottom">
+                    <span class="price">P${product.price.toFixed(2)}</span>
+                    <button class="btn-add" onclick="event.stopPropagation(); addToCart(${product.id})">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+  }
+
+  // Filter Categories
+  function filterCategory(category) {
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    if (category === 'all') {
+      renderProducts(products);
+    } else {
+      renderProducts(products.filter(p => p.category === category));
+    }
+  }
+
+  /* --- PRODUCT DETAIL MODAL LOGIC --- */
+  function openProductModal(productId) {
+    currentProduct = products.find(p => p.id === productId);
+    if (!currentProduct) return;
+
+    // Populate details
+    document.getElementById('detail-title').textContent = currentProduct.name;
+    document.getElementById('detail-price').textContent = `P${currentProduct.price.toFixed(2)}`;
+    document.getElementById('detail-desc').textContent = currentProduct.desc;
+    document.getElementById('detail-main-img').src = currentProduct.image;
+    document.getElementById('detail-qty').value = 1;
+
+    // Setup thumbnails
+    const thumbnailsContainer = document.getElementById('detail-thumbnails');
+    thumbnailsContainer.innerHTML = currentProduct.gallery.map((imgUrl, idx) => `
+      <img src="${imgUrl}" class="thumbnail ${idx === 0 ? 'active' : ''}" onclick="switchModalImage(this, '${imgUrl}')" onerror="this.src='https://via.placeholder.com/70?text=Sample'">
+    `).join('');
+
+    // Setup Add Button
+    document.getElementById('modal-add-btn').onclick = () => {
+      const qty = parseInt(document.getElementById('detail-qty').value);
+      addToCart(currentProduct.id, qty);
+      closeProductModal();
+    };
+
+    document.getElementById('product-modal').classList.add('open');
+  }
+
+  function closeProductModal() {
+    document.getElementById('product-modal').classList.remove('open');
+  }
+
+  function switchModalImage(thumbElem, imgUrl) {
+    document.getElementById('detail-main-img').src = imgUrl;
+    document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+    thumbElem.classList.add('active');
+  }
+
+  function changeQty(delta) {
+    const qtyInput = document.getElementById('detail-qty');
+    let val = parseInt(qtyInput.value) + delta;
+    if (val < 1) val = 1;
+    qtyInput.value = val;
+  }
+
+  function buyNow() {
+    if (!currentProduct) return;
+    const qty = parseInt(document.getElementById('detail-qty').value);
+    addToCart(currentProduct.id, qty);
+    closeProductModal();
+    toggleCart();
+  }
+
+  /* --- CART LOGIC --- */
+  function addToCart(productId, quantity = 1) {
+    const item = products.find(p => p.id === productId);
+    for (let i = 0; i < quantity; i++) {
+      cart.push(item);
+    }
+    updateCartUI();
+  }
+
+  function updateCartUI() {
+    document.getElementById('cart-count').textContent = cart.length;
+    const cartItemsContainer = document.getElementById('cart-items');
+
+    if (cart.length === 0) {
+      cartItemsContainer.innerHTML = '<p style="color: var(--text-muted);">Your cart is empty.</p>';
+      document.getElementById('cart-total').textContent = 'P0.00';
+      return;
+    }
+
+    cartItemsContainer.innerHTML = cart.map((item, index) => `
+        <div class="cart-item">
+            <div>
+                <div style="font-weight: 600;">${item.name}</div>
+                <div style="color: var(--accent-copper); font-size: 0.9rem;">P${item.price.toFixed(2)}</div>
+            </div>
+            <button style="background:none; border:none; color: #ef4444; cursor:pointer;" onclick="removeFromCart(${index})">Remove</button>
+        </div>
+    `).join('');
+
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    document.getElementById('cart-total').textContent = `P${total.toFixed(2)}`;
+  }
+
+  function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCartUI();
+  }
+
+  function toggleCart() {
+    document.getElementById('cart-drawer').classList.toggle('open');
+  }
+
+  function checkout() {
+    if (cart.length === 0) {
+      alert('Your cart is empty!');
+      return;
+    }
+    alert('Thank you for supporting Tswana-Antique! Proceeding to payment setup.');
+    cart = [];
+    updateCartUI();
+    toggleCart();
+  }
+
+  // Initial Load
+  renderProducts(products);
+</script>
 </body>
 </html>
