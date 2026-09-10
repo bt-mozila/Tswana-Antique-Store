@@ -532,7 +532,7 @@
 <div class="container">
   <nav>
     <div class="brand">
-      <img src="logo.png" alt="Tswana Antique Store logo" onerror="this.style.display='none'">
+      <img src="assets/img/branding/logo.png" alt="Tswana Antique Store logo" onerror="this.style.display='none'">
     </div>
 
     <button class="cart-icon-btn" onclick="toggleCart()">
@@ -542,14 +542,15 @@
 
   <header class="hero">
     <h1>Authentic Antique Collection</h1>
-    <p>Handcrafted copper bangles, heritage bracelets, and traditional hand-woven hats crafted with legacy and tradition.</p>
+    <p>Handcrafted copper bangles, heritage bracelets, and traditional hand-woven baskets crafted with legacy and tradition.</p>
   </header>
 
   <div class="controls">
     <button class="filter-btn active" onclick="filterCategory('all')">All Items</button>
+    <button class="filter-btn" onclick="filterCategory('bracelets')">Copper Bracelets</button>
     <button class="filter-btn" onclick="filterCategory('bangles')">Copper Bangles</button>
-    <button class="filter-btn" onclick="filterCategory('bracelets')">Bracelets</button>
-    <button class="filter-btn" onclick="filterCategory('hats')">Traditional Hats</button>
+    <button class="filter-btn" onclick="filterCategory('utensils')">Copper Utensils</button>
+    <button class="filter-btn" onclick="filterCategory('baskets')">Traditional baskets</button>
   </div>
 
   <div class="product-grid" id="product-container"></div>
@@ -628,10 +629,10 @@
     {
       id: 1,
       name: "Hand-Hammered Copper Bangle",
-      category: "bangles",
+      category: "bracelets",
       price: 45.00,
-      image: "antique2.png",
-      gallery: ["antique2.png", "antique1.png", "antique2.png"],
+      image: "assets/img/copper-jewel/antique17.jpg",
+      gallery: ["assets/img/copper-jewel/antique17.jpg", "assets/img/copper-jewel/antique2.png"],
       desc: "Pure copper metalwork with traditional engraved motifs."
     },
     {
@@ -639,62 +640,135 @@
       name: "Twisted Copper Wristband",
       category: "bangles",
       price: 55.00,
-      image: "antique2.png",
-      gallery: ["antique2.png", "antique1.png"],
+      image: "assets/img/copper-jewel/antique20.jpg",
+      gallery: ["assets/img/copper-jewel/antique20.jpg"],
       desc: "Classic twisted dual-strand copper wire design."
     },
     {
       id: 3,
       name: "Beaded Heritage Bracelet",
-      category: "bracelets",
+      category: "utensils",
       price: 35.00,
-      image: "antique2.png",
-      gallery: ["antique2.png", "antique1.png"],
+      image: "assets/img/copper-jewel/antique7.jpg",
+      gallery: ["assets/img/copper-jewel/antique7.jpg", "assets/img/copper-jewel/antique2.png"],
       desc: "Hand-strung antique brass and glass beads."
     },
     {
       id: 4,
       name: "Woven Palm-Leaf Sun Hat",
-      category: "hats",
+      category: "bracelets",
       price: 60.00,
-      image: "antique2.png",
-      gallery: ["antique2.png", "antique1.png"],
+      image: "assets/img/copper-jewel/antique21.jpg",
+      gallery: ["assets/img/copper-jewel/antique14.jpg", "assets/img/copper-jewel/antique16.jpg"],
       desc: "Handcrafted natural fiber weave with sturdy sun protection."
     },
     {
       id: 5,
       name: "Raw Copper Cuff",
-      category: "bangles",
+      category: "baskets",
       price: 50.00,
-      image: "antique1.png",
-      gallery: ["antique1.png", "antique2.png"],
+      image: "assets/img/crafts/bascket5.png",
+      gallery: ["assets/img/crafts/bascket5.png", "assets/img/copper-jewel/antique10.jpg"],
       desc: "Minimalist open-cuff design built to age with patina."
     },
     {
       id: 6,
       name: "Ceremonial Straw Hat",
-      category: "hats",
+      category: "baskets",
       price: 75.00,
-      image: "antique2.png",
-      gallery: ["antique2.png", "antique1.png"],
+      image: "assets/img/copper-jewel/antique2.png",
+      gallery: ["assets/img/copper-jewel/antique2.png", "assets/img/copper-jewel/antique2.png"],
       desc: "Intricately detailed traditional ceremonial headwear."
     },
     {
       id: 7,
       name: "Ceremonial Straw Hat",
-      category: "hats",
+      category: "utensils",
       price: 75.00,
-      image: "antique2.png",
-      gallery: ["antique2.png", "antique1.png"],
+      image: "assets/img/copper-jewel/antique9.jpg",
+      gallery: ["assets/img/copper-jewel/antique9.jpg", "assets/img/copper-jewel/antique8.jpg"],
       desc: "Intricately detailed traditional ceremonial headwear."
     },
     {
       id: 8,
       name: "Ceremonial Straw Hat",
-      category: "hats",
+      category: "baskets",
       price: 75.00,
-      image: "antique2.png",
-      gallery: ["antique2.png", "antique1.png"],
+      image: "assets/img/copper-jewel/antique2.png",
+      gallery: ["assets/img/copper-jewel/antique2.png", "assets/img/copper-jewel/antique4.jpg"],
+      desc: "Intricately detailed traditional ceremonial headwear."
+    },
+
+    {
+      id: 9,
+      name: "Ceremonial Straw Hat",
+      category: "utensils",
+      price: 75.00,
+      image: "assets/img/copper-jewel/antique9.jpg",
+      gallery: ["assets/img/copper-jewel/antique9.jpg", "assets/img/copper-jewel/antique8.jpg"],
+      desc: "Intricately detailed traditional ceremonial headwear."
+    },
+    {
+      id: 10,
+      name: "Ceremonial Straw Hat",
+      category: "baskets",
+      price: 75.00,
+      image: "assets/img/copper-jewel/antique2.png",
+      gallery: ["assets/img/copper-jewel/antique2.png", "assets/img/copper-jewel/antique3.jpg"],
+      desc: "Intricately detailed traditional ceremonial headwear."
+    },
+    {
+      id: 11,
+      name: "Ceremonial Straw Hat",
+      category: "utensils",
+      price: 75.00,
+      image: "assets/img/copper-jewel/antique9.jpg",
+      gallery: ["assets/img/copper-jewel/antique9.jpg", "assets/img/copper-jewel/antique8.jpg"],
+      desc: "Intricately detailed traditional ceremonial headwear."
+    },
+    {
+      id: 12,
+      name: "Ceremonial Straw Hat",
+      category: "baskets",
+      price: 75.00,
+      image: "assets/img/crafts/bascket1.jpg",
+      gallery: ["assets/img/crafts/bascket1.jpg", "assets/img/crafts/bascket2.jpg", "assets/img/crafts/bascket2.jpg"],
+      desc: "Intricately detailed traditional ceremonial headwear."
+    },
+    {
+      id: 13,
+      name: "Ceremonial Straw Hat",
+      category: "baskets",
+      price: 75.00,
+      image: "assets/img/copper-jewel/antique9.jpg",
+      gallery: ["assets/img/copper-jewel/antique9.jpg", "assets/img/copper-jewel/antique8.jpg"],
+      desc: "Intricately detailed traditional ceremonial headwear."
+    },
+    {
+      id: 14,
+      name: "Ceremonial Straw Hat",
+      category: "baskets",
+      price: 75.00,
+      image: "assets/img/copper-jewel/antique2.png",
+      gallery: ["assets/img/copper-jewel/antique2.png", "assets/img/copper-jewel/antique5.jpg"],
+      desc: "Intricately detailed traditional ceremonial headwear."
+    },
+    {
+      id: 15,
+      name: "Ceremonial Straw Hat",
+      category: "baskets",
+      price: 75.00,
+      image: "assets/img/copper-jewel/antique9.jpg",
+      gallery: ["assets/img/copper-jewel/antique9.jpg", "assets/img/copper-jewel/antique8.jpg"],
+      desc: "Intricately detailed traditional ceremonial headwear."
+    },
+    {
+      id: 16,
+      name: "Ceremonial Straw Hat",
+      category: "baskets",
+      price: 75.00,
+      image: "assets/img/copper-jewel/antique2.png",
+      gallery: ["assets/img/copper-jewel/antique2.png", "assets/img/copper-jewel/antique2.png"],
       desc: "Intricately detailed traditional ceremonial headwear."
     }
 
